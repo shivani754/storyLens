@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@layer components {
+  .form-label {
+    @apply block text-gray-700 dark:text-gray-300 mb-1;
+  }
+
+  .form-input {
+    @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-gray-700
+           text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition;
+  }
+
+  .form-input:focus {
+    @apply border-blue-500 dark:border-blue-400;
+  }
+
+  .input-error {
+    @apply border-red-600;
+  }
+}
