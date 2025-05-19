@@ -1,3 +1,12 @@
+@layer base {
+  button:disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+  button:hover:enabled {
+    @apply cursor-pointer;
+  }
+}
+
 @layer components {
   .button-success {
     @apply bg-green-600 hover:bg-green-700 text-white py-2 rounded transition duration-300;
