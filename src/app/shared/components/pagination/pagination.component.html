@@ -1,0 +1,54 @@
+<div class="flex justify-center mt-6">
+  <nav
+    class="inline-flex items-center gap-1 bg-white px-4 py-2 shadow-lg rounded-full text-sm font-medium text-gray-700"
+  >
+    <button
+      (click)="changePage(currentPage - 1)"
+      [disabled]="currentPage === 1"
+      class="px-3 py-1 rounded-full text-indigo-500 hover:text-indigo-600 hover:bg-gray-100 transition disabled:opacity-50"
+    >
+      <
+    </button>
+
+    <ng-container *ngIf="pages[0] > 1">
+      <button
+        (click)="changePage(1)"
+        class="px-3 py-1 rounded-full hover:bg-indigo-100 transition"
+      >
+        1
+      </button>
+      <span class="px-2">...</span>
+    </ng-container>
+
+    <ng-container *ngFor="let page of pages">
+      <button
+        (click)="changePage(page)"
+        [ngClass]="{
+          'bg-indigo-600 text-white': page === currentPage,
+          'hover:bg-indigo-100': page !== currentPage,
+        }"
+        class="px-3 py-1 rounded-full transition"
+      >
+        {{ page }}
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="pages[pages.length - 1] < totalPages">
+      <span class="px-2">...</span>
+      <button
+        (click)="changePage(totalPages)"
+        class="px-3 py-1 rounded-full hover:bg-indigo-100 transition"
+      >
+        {{ totalPages }}
+      </button>
+    </ng-container>
+
+    <button
+      (click)="changePage(currentPage + 1)"
+      [disabled]="currentPage === totalPages"
+      class="px-3 py-1 rounded-full text-indigo-500 hover:text-indigo-600 hover:bg-gray-100 transition disabled:opacity-50"
+    >
+      >
+    </button>
+  </nav>
+</div>
