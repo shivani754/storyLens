@@ -1,0 +1,47 @@
+<div class="flex items-center justify-between bg-gray-800 px-6 py-3 shadow-md">
+  <!-- Left side: Logo -->
+  <div class="flex items-center space-x-4">
+    <!-- Logo -->
+    <img
+      src="https://images.squarespace-cdn.com/content/v1/59d7fb02c027d8973ddee354/d4295c8b-89da-4cdd-b49c-62f4d62191b1/LogoGif2021.gif"
+      alt="Logo"
+      class="h-9 w-full object-contain"
+    />
+  </div>
+  <!-- Right side: Avatar -->
+  <div>
+    <!-- Avatar with dropdown -->
+    <div
+      class="flex items-center"
+      (click)="toggleDropdown()"
+      tabindex="0"
+      (blur)="closeDropdown()"
+    >
+      <div class="mr-2">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+          alt="User Avatar"
+          class="h-6 w-6 rounded-full cursor-pointer"
+        />
+      </div>
+      <div
+        class="text-white text-bold cursor-pointer"
+        [innerText]="userDetails.username"
+      ></div>
+
+      <!-- Dropdown -->
+      @if (isDropdownOpen) {
+        <div
+          class="absolute right-1 mt-28 w-32 bg-white border rounded-md shadow-lg py-1 z-20"
+        >
+          <button
+            (click)="logout()"
+            class="block w-full text-left px-4 py-2 hover:bg-red-100 text-red-600"
+          >
+            Logout
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+</div>
