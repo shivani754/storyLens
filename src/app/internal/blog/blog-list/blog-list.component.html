@@ -40,7 +40,7 @@
           alt="No posts available"
           class="w-96 h-96 mb-4"
         />
-        <p class="text-gray-500 text-lg">No posts available</p>
+        <p class="text-gray-500 text-lg">No blogs available</p>
       </div>
     }
 
@@ -50,7 +50,7 @@
         <button
           (click)="prevPage()"
           [disabled]="pageParams.page === 0"
-          class="px-4 py-2 button-indigo"
+          class="button-indigo"
         >
           ← Previous
         </button>
@@ -58,7 +58,7 @@
         <button
           (click)="nextPage()"
           [disabled]="pageParams.page === pageParams.totalPage - 1"
-          class="px-4 py-2 button-indigo"
+          class="button-indigo"
         >
           Next →
         </button>

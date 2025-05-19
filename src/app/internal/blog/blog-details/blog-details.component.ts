@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../blog.service';
 import { Blog } from '../models/blog.model';
 import { PageLoaderComponent } from '../../../shared/components/page-loader/page-loader.component';
+import { Comment } from '../models/comment.model';
 
 @Component({
   selector: 'app-blog-details',
@@ -19,7 +20,7 @@ export class BlogDetailsComponent implements OnInit {
     body: '',
     userId: 0,
   };
-  comments: any = [];
+  comments: Array<Comment> = [];
 
   constructor(
     private router: Router,
