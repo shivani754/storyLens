@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { blogRoutes } from './blog/blog.routes';
 
 export const internalRoutes: Routes = [
   {
@@ -6,10 +7,7 @@ export const internalRoutes: Routes = [
     children: [
       {
         path: 'blogs',
-        loadComponent: () =>
-          import('./blog/blog-list/blog-list.component').then(
-            (m) => m.BlogListComponent,
-          ),
+        children: blogRoutes,
       },
       { path: '', redirectTo: 'blogs', pathMatch: 'full' },
     ],
