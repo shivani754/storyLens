@@ -40,12 +40,16 @@ export class LoginComponent {
       return;
     }
     this.globalService.setUserDetails({ username: this.loginData.username });
-    this.router.navigate(['/internal']);
+    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+    !returnUrl
+      ? this.router.navigate(['/internal'])
+      : this.router.navigateByUrl(returnUrl + '/comment');
   }
 
   goToSignUp() {
     this.router.navigate(['../signup'], {
       relativeTo: this.route,
+      queryParamsHandling: 'merge',
     });
   }
 }
