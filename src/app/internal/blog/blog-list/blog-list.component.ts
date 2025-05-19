@@ -4,11 +4,12 @@ import { BlogService } from '../blog.service';
 import { Blog } from '../models/blog.model';
 import { Page } from '../../../shared/models/page.model';
 import { PageLoaderComponent } from '../../../shared/components/page-loader/page-loader.component';
+import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-blog-list',
   standalone: true,
-  imports: [PageLoaderComponent],
+  imports: [PageLoaderComponent, PaginationComponent],
   templateUrl: './blog-list.component.html',
   styleUrl: './blog-list.component.css',
 })
@@ -33,17 +34,15 @@ export class BlogListComponent implements OnInit {
       .getBlogPosts()
       .subscribe((response: any) => {
         this.posts = response;
-        this.pageParams.totalPage = this.posts.length / this.pageParams.size;
+        this.pageParams.totalPage = Math.ceil(
+          this.posts.length / this.pageParams.size,
+        );
       })
       .add(() => (this.pageLoader = false));
   }
 
-  prevPage() {
-    this.pageParams.page--;
-  }
-
-  nextPage() {
-    this.pageParams.page++;
+  onPageChange(event: any) {
+    this.pageParams.page = event;
   }
 
   goToBlogDetails(id: number) {

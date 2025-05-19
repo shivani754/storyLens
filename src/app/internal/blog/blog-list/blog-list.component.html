@@ -6,8 +6,8 @@
 
     @for (
       post of posts.slice(
-        pageParams.page * pageParams.size,
-        pageParams.page * pageParams.size + pageParams.size
+        (pageParams.page - 1) * pageParams.size,
+        (pageParams.page - 1) * pageParams.size + pageParams.size
       );
       track $index
     ) {
@@ -46,23 +46,11 @@
 
     <!-- Pagination -->
     @if (posts.length) {
-      <div class="flex justify-between items-center mt-6 px-4">
-        <button
-          (click)="prevPage()"
-          [disabled]="pageParams.page === 0"
-          class="button-indigo"
-        >
-          ← Previous
-        </button>
-
-        <button
-          (click)="nextPage()"
-          [disabled]="pageParams.page === pageParams.totalPage - 1"
-          class="button-indigo"
-        >
-          Next →
-        </button>
-      </div>
+      <app-pagination
+        [currentPage]="pageParams.page"
+        [totalPages]="pageParams.totalPage"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
     }
   </div>
 }
