@@ -9,7 +9,26 @@
     />
   </div>
   <!-- Right side: Avatar -->
-  <div>
+  <div class="flex justify-between space-x-24">
+    <div class="flex space-x-4">
+      <div
+        [ngClass]="{
+          'border-b-2 border-white': isActive('blogs'),
+        }"
+        class="text-white cursor-pointer hover:text-blue-300 transition-colors duration-200"
+        [innerText]="'Blog'"
+        (click)="goTo('blog')"
+      ></div>
+      <div
+        [ngClass]="{
+          'border-b-2 border-white': isActive('photo-archive'),
+        }"
+        class="text-white cursor-pointer hover:text-blue-300 transition-colors duration-200"
+        [innerText]="'Photo Archive'"
+        (click)="goTo('photo-archive')"
+      ></div>
+    </div>
+
     <!-- Avatar with dropdown -->
     <div
       class="flex items-center"
