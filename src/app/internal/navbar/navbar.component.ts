@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
   constructor(private globalService: GlobalService) {}
 
   ngOnInit() {
-    this.userDetails = this.globalService.getUserDetails();
+    this.userDetails = this.globalService.getUserDetails() || {};
   }
 
   toggleDropdown() {
