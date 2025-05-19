@@ -24,10 +24,12 @@
           class="h-6 w-6 rounded-full cursor-pointer"
         />
       </div>
-      <div
-        class="text-white text-bold cursor-pointer"
-        [innerText]="userDetails.username"
-      ></div>
+      @if (userDetails.username) {
+        <div
+          class="text-white text-bold cursor-pointer"
+          [innerText]="userDetails.username"
+        ></div>
+      }
 
       <!-- Dropdown -->
       @if (isDropdownOpen) {
