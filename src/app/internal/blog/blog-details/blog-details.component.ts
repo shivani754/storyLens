@@ -32,6 +32,12 @@ export class BlogDetailsComponent implements OnInit {
     this.route.params.subscribe((params: any) => {
       this.postId = +params.postId;
     });
+    this.route.queryParams.subscribe((query_params: any) => {
+      if (query_params.newComment) {
+        this.comments.push(JSON.parse(query_params.newComment));
+        this.router.navigate([]);
+      }
+    });
     this.getBlogDetails();
   }
 
@@ -54,7 +60,7 @@ export class BlogDetailsComponent implements OnInit {
       postId: this.postId,
     };
     this.blogService.getComments(params).subscribe((response: any) => {
-      this.comments = response;
+      this.comments.push(...response);
     });
   }
 
