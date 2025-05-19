@@ -3,6 +3,7 @@ import { LoginModel } from '../models/login.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalService } from '../../core/services/global.service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private globalService: GlobalService,
   ) {}
 
   onSubmit() {
@@ -37,6 +39,7 @@ export class LoginComponent {
       alert('User or password is not correct!');
       return;
     }
+    this.globalService.setUserDetails({ username: this.loginData.username });
     this.router.navigate(['/internal']);
   }
 
