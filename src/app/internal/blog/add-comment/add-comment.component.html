@@ -1,0 +1,21 @@
+<div class="p-4">
+  <form
+    name="commentForm"
+    #commentForm="ngForm"
+    (ngSubmit)="commentForm.valid && addComment()"
+    class="mt-6 space-y-4"
+  >
+    <!-- Textare -->
+    <textarea
+      [(ngModel)]="commentData.body"
+      name="comment"
+      #comment="ngModel"
+      rows="4"
+      placeholder="Write your comment..."
+      class="form-input"
+      required
+    ></textarea>
+    <!-- Submit button -->
+    <button type="submit" class="px-4 py-2 button-indigo">Submit</button>
+  </form>
+</div>
