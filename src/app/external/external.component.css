@@ -1,0 +1,11 @@
+/* .external-container {
+  background:
+    radial-gradient(circle at center, #fff 0%, transparent 70%),
+    repeating-conic-gradient(
+      from 0deg,
+      rgb(175 183 216 / 30%) 0deg 5deg,
+      transparent 5deg 10deg
+    );
+  transform-origin: top left;
+  background-blend-mode: screen;
+} */
