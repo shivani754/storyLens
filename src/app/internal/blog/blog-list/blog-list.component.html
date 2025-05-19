@@ -1,0 +1,68 @@
+@if (pageLoader) {
+  <app-page-loader />
+} @else {
+  <div class="max-w-4xl mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Latest Blogs</h1>
+
+    @for (
+      post of posts.slice(
+        pageParams.page * pageParams.size,
+        pageParams.page * pageParams.size + pageParams.size
+      );
+      track $index
+    ) {
+      <div
+        class="bg-white p-6 rounded-xl shadow-md mb-4 cursor-pointer"
+        (click)="goToBlogDetails(post.id)"
+      >
+        <h2
+          class="text-xl font-semibold text-gray-700 mb-2"
+          [innerText]="post.title"
+        ></h2>
+        <p class="text-gray-700 mb-4" [innerText]="post.body"></p>
+        <div class="flex items-center text-gray-500 text-sm">
+          <svg
+            class="w-5 h-5 mr-1 text-blue-500"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M18 10c0 3.866-3.582 7-8 7-1.185 0-2.308-.207-3.292-.571L3 17l.571-3.708C3.207 12.308 3 11.185 3 10c0-4.418 3.134-8 7-8s8 3.582 8 8z"
+            />
+          </svg>
+          <span>0 Comments</span>
+        </div>
+      </div>
+    } @empty {
+      <div class="flex flex-col items-center justify-center text-center">
+        <img
+          src="https://img.freepik.com/premium-vector/no-data-concept-illustration_86047-488.jpg"
+          alt="No posts available"
+          class="w-96 h-96 mb-4"
+        />
+        <p class="text-gray-500 text-lg">No posts available</p>
+      </div>
+    }
+
+    <!-- Pagination -->
+    @if (posts.length) {
+      <div class="flex justify-between items-center mt-6 px-4">
+        <button
+          (click)="prevPage()"
+          [disabled]="pageParams.page === 0"
+          class="px-4 py-2 button-indigo"
+        >
+          ← Previous
+        </button>
+
+        <button
+          (click)="nextPage()"
+          [disabled]="pageParams.page === pageParams.totalPage - 1"
+          class="px-4 py-2 button-indigo"
+        >
+          Next →
+        </button>
+      </div>
+    }
+  </div>
+}
