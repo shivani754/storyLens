@@ -37,11 +37,10 @@
           class="absolute right-1 mt-28 w-32 bg-white border rounded-md shadow-lg py-1 z-20"
         >
           <button
-            (click)="logout()"
-            class="block w-full text-left px-4 py-2 hover:bg-red-100 text-red-600"
-          >
-            Logout
-          </button>
+            (click)="userDetails.username ? logout() : login()"
+            class="block w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-600"
+            [innerText]="userDetails.username ? 'Logout' : 'Login'"
+          ></button>
         </div>
       }
     </div>

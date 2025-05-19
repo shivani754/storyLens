@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalService } from '../../core/services/global.service';
 import { UserDetailsModel } from '../../shared/models/user-details.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,10 @@ export class NavbarComponent implements OnInit {
     username: '',
   };
 
-  constructor(private globalService: GlobalService) {}
+  constructor(
+    private globalService: GlobalService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.userDetails = this.globalService.getUserDetails() || {};
@@ -31,5 +35,12 @@ export class NavbarComponent implements OnInit {
     }, 100);
   }
 
-  logout() {}
+  logout() {
+    localStorage.removeItem('userCredentials');
+    location.reload();
+  }
+
+  login() {
+    this.router.navigate(['/auth/login']);
+  }
 }
