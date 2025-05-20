@@ -1,0 +1,47 @@
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BlogService } from '../blog.service';
+import { Comment } from '../models/comment.model';
+
+@Component({
+  selector: 'app-comments',
+  imports: [],
+  standalone: true,
+  templateUrl: './comments.component.html',
+  styleUrl: './comments.component.css',
+})
+export class CommentsComponent implements OnInit {
+  @Input() postId: number = 0;
+  comments: Array<Comment> = [];
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private blogService: BlogService,
+  ) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((query_params: any) => {
+      if (query_params.newComment) {
+        this.comments.push(JSON.parse(query_params.newComment));
+        this.router.navigate([]);
+      }
+    });
+    this.getComments();
+  }
+
+  getComments() {
+    const params: any = {
+      postId: this.postId,
+    };
+    this.blogService.getComments(params).subscribe((response: any) => {
+      this.comments.push(...response);
+    });
+  }
+
+  goToAddComment() {
+    this.router.navigate(['comment'], {
+      relativeTo: this.route,
+    });
+  }
+}

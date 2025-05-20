@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../blog.service';
 import { Blog } from '../models/blog.model';
 import { PageLoaderComponent } from '../../../shared/components/page-loader/page-loader.component';
-import { Comment } from '../models/comment.model';
+import { CommentsComponent } from '../comments/comments.component';
 
 @Component({
   selector: 'app-blog-details',
-  imports: [PageLoaderComponent],
+  imports: [PageLoaderComponent, CommentsComponent],
   templateUrl: './blog-details.component.html',
   styleUrl: './blog-details.component.css',
 })
@@ -20,7 +20,6 @@ export class BlogDetailsComponent implements OnInit {
     body: '',
     userId: 0,
   };
-  comments: Array<Comment> = [];
 
   constructor(
     private router: Router,
@@ -31,12 +30,6 @@ export class BlogDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       this.postId = +params.postId;
-    });
-    this.route.queryParams.subscribe((query_params: any) => {
-      if (query_params.newComment) {
-        this.comments.push(JSON.parse(query_params.newComment));
-        this.router.navigate([]);
-      }
     });
     this.getBlogDetails();
   }
@@ -50,23 +43,7 @@ export class BlogDetailsComponent implements OnInit {
       .getBlogDetails(params)
       .subscribe((response: any) => {
         this.post = response;
-        this.getComments();
       })
       .add(() => (this.pageLoader = false));
-  }
-
-  getComments() {
-    const params: any = {
-      postId: this.postId,
-    };
-    this.blogService.getComments(params).subscribe((response: any) => {
-      this.comments.push(...response);
-    });
-  }
-
-  goToAddComment() {
-    this.router.navigate(['comment'], {
-      relativeTo: this.route,
-    });
   }
 }
