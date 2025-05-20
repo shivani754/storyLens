@@ -31,8 +31,16 @@
 
     <!-- Avatar with dropdown -->
     <div class="flex items-center" (click)="toggleDropdown()" tabindex="0" (blur)="closeDropdown()">
-      <div class="mr-2">
-        <app-profile-pic [name]="userDetails.username" [size]="'xs'"></app-profile-pic>
+      <div class="mr-2 cursor-pointer">
+        <app-profile-pic
+          [name]="userDetails.username"
+          [imageUrl]="
+            !userDetails.username
+              ? 'https://png.pngtree.com/png-clipart/20210915/ourmid/pngtree-user-avatar-placeholder-black-png-image_3918427.jpg'
+              : null
+          "
+          [size]="'xs'"
+        ></app-profile-pic>
       </div>
       @if (userDetails.username) {
         <div class="text-white text-bold cursor-pointer" [innerText]="userDetails.username"></div>

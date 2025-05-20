@@ -1,17 +1,11 @@
 <div
-  class="flex items-center justify-center rounded-full overflow-hidden bg-gray-300 font-bold text-base text-gray-800 uppercase p-4"
+  #profileImg
+  class="flex items-center justify-center rounded-full overflow-hidden font-bold text-base text-gray-800 uppercase p-4"
   [ngClass]="sizeClass"
-  [ngStyle]="{ width: size, height: size, backgroundColor: bgColor }"
+  [ngStyle]="{ backgroundColor: bgColor }"
 >
-  @if (imageUrl) {
-    <img
-      class="rounded-full object-cover"
-      [src]="imageUrl"
-      [alt]="name"
-      [ngStyle]="{ width: size, height: size }"
-    />
-  } @else {
-    <div [ngStyle]="{ width: size, height: size }">
+  @if (!imageUrl) {
+    <div [ngClass]="sizeClass" [ngStyle]="{ backgroundColor: bgColor }">
       {{ initials }}
     </div>
   }

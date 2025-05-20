@@ -1,5 +1,13 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-profile-pic',
@@ -7,7 +15,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
   templateUrl: './profile-pic.component.html',
   styleUrl: './profile-pic.component.css',
 })
-export class ProfilePicComponent implements OnChanges {
+export class ProfilePicComponent implements AfterViewInit, OnChanges {
   @Input() name = '';
   @Input() imageUrl: string | null = null;
   @Input() size = 'xs'; // Default size
@@ -25,6 +33,18 @@ export class ProfilePicComponent implements OnChanges {
     '#FFE0B2',
     '#D7CCC8',
   ];
+  @ViewChild('profileImg') profileImg!: ElementRef<HTMLDivElement>;
+
+  ngAfterViewInit(): void {
+    this.setBackground();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['name'] || changes['imageUrl']) {
+      this.sizeClass = this.sizeClass + this.size;
+      this.setBackground();
+    }
+  }
 
   /**
    * @description Getting background color randomly from array
@@ -33,16 +53,21 @@ export class ProfilePicComponent implements OnChanges {
    */
   private getRandomColor(key: string): string {
     let hash = 0;
-    for (let i = 0; i < key.length; i++) {
+    for (let i = 0; i < key?.length; i++) {
       hash = key.charCodeAt(i) + ((hash << 5) - hash);
     }
-    const index = Math.abs(hash) % this.bgColors.length;
+    const index = Math.abs(hash) % this.bgColors?.length;
     return this.bgColors[index];
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['name'] || changes['imageUrl']) {
-      this.sizeClass = this.sizeClass + this.size;
+  private setBackground() {
+    if (this.imageUrl) {
+      setTimeout(() => {
+        this.profileImg.nativeElement.style.backgroundImage = `url("${this.imageUrl}")`;
+        this.profileImg.nativeElement.style.backgroundSize = 'contain';
+        this.profileImg.nativeElement.style.backgroundRepeat = 'no-repeat';
+      }, 100);
+    } else {
       this.bgColor = this.getRandomColor(this.name);
     }
   }
