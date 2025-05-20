@@ -7,11 +7,7 @@
       class="sticky top-[60px] z-30 text-center bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 text-white border-blue-200 shadow p-4 mb-6 backdrop-blur-md"
     >
       <h3 class="text-2xl font-extrabold flex items-center gap-3">
-        <svg
-          class="w-8 h-8 text-blue-500"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
+        <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
           <path d="M5 4v16h14V4H5zm12 14H7V6h10v12zm-2-6h-6v-2h6v2z" />
         </svg>
         Latest Blogs
@@ -28,17 +24,10 @@
         class="bg-white p-6 rounded-xl shadow-md mb-4 cursor-pointer"
         (click)="goToBlogDetails(post.id)"
       >
-        <h2
-          class="text-xl font-semibold text-gray-700 mb-2"
-          [innerText]="post.title"
-        ></h2>
+        <h2 class="text-xl font-semibold text-gray-700 mb-2" [innerText]="post.title"></h2>
         <p class="text-gray-700 mb-4" [innerText]="post.body"></p>
         <div class="flex items-center text-gray-500 text-sm">
-          <svg
-            class="w-5 h-5 mr-1 text-blue-500"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
+          <svg class="w-5 h-5 mr-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
             <path
               d="M18 10c0 3.866-3.582 7-8 7-1.185 0-2.308-.207-3.292-.571L3 17l.571-3.708C3.207 12.308 3 11.185 3 10c0-4.418 3.134-8 7-8s8 3.582 8 8z"
             />

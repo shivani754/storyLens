@@ -7,13 +7,11 @@ export const externalRoutes: Routes = [
     children: [
       {
         path: 'signup',
-        loadComponent: () =>
-          import('./signup/signup.component').then((m) => m.SignupComponent),
+        loadComponent: () => import('./signup/signup.component').then((m) => m.SignupComponent),
       },
       {
         path: 'login',
-        loadComponent: () =>
-          import('./login/login.component').then((m) => m.LoginComponent),
+        loadComponent: () => import('./login/login.component').then((m) => m.LoginComponent),
       },
       { path: '', redirectTo: 'signup', pathMatch: 'full' },
     ],

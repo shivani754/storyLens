@@ -19,15 +19,10 @@ export class BlogService {
   }
 
   getComments(params: any) {
-    return this.httpClient.get(
-      this.baseUrl + 'posts/' + params.postId + '/comments',
-    );
+    return this.httpClient.get(this.baseUrl + 'posts/' + params.postId + '/comments');
   }
 
   addComment(body: Comment) {
-    return this.httpClient.post(
-      this.baseUrl + 'posts/' + body.postId + '/comments',
-      body,
-    );
+    return this.httpClient.post(this.baseUrl + 'posts/' + body.postId + '/comments', body);
   }
 }

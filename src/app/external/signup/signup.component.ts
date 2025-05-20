@@ -35,21 +35,14 @@ export class SignupComponent {
   }
 
   checkPasswordMatch(): void {
-    this.isPasswordMatch =
-      this.signupData.password === this.signupData.confirmPassword;
+    this.isPasswordMatch = this.signupData.password === this.signupData.confirmPassword;
   }
 
   onSubmit() {
     const { username, password } = this.signupData;
 
-    localStorage.setItem(
-      'userCredentials',
-      JSON.stringify({ username, password }),
-    );
-    this.toastService.showToast(
-      'Signup successful! You can now login.',
-      'success',
-    );
+    localStorage.setItem('userCredentials', JSON.stringify({ username, password }));
+    this.toastService.showToast('Signup successful! You can now login.', 'success');
     this.goToLogin();
   }
 

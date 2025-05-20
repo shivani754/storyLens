@@ -3,10 +3,7 @@
     class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-md px-4 py-3 flex justify-between items-start gap-4 rounded-lg shadow-lg border"
     [ngClass]="toastClasses"
   >
-    <span
-      class="text-sm text-gray-800 dark:text-white"
-      [innerText]="message"
-    ></span>
+    <span class="text-sm text-gray-800 dark:text-white" [innerText]="message"></span>
     <button
       class="text-xl leading-none text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white"
       (click)="close()"

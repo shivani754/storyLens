@@ -12,16 +12,12 @@ export const photoArchiveRoutes: Routes = [
             path: '',
             pathMatch: 'full',
             loadComponent: () =>
-              import('./album-grid/album-grid.component').then(
-                (m) => m.AlbumGridComponent,
-              ),
+              import('./album-grid/album-grid.component').then((m) => m.AlbumGridComponent),
           },
           {
             path: ':albumId',
             loadComponent: () =>
-              import('./album-photos/album-photos.component').then(
-                (m) => m.AlbumPhotosComponent,
-              ),
+              import('./album-photos/album-photos.component').then((m) => m.AlbumPhotosComponent),
           },
         ],
       },

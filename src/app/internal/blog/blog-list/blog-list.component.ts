@@ -34,9 +34,7 @@ export class BlogListComponent implements OnInit {
       .getBlogPosts()
       .subscribe((response: any) => {
         this.posts = response;
-        this.pageParams.totalPage = Math.ceil(
-          this.posts.length / this.pageParams.size,
-        );
+        this.pageParams.totalPage = Math.ceil(this.posts.length / this.pageParams.size);
       })
       .add(() => (this.pageLoader = false));
   }

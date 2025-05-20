@@ -8,9 +8,7 @@ export const blogRoutes: Routes = [
       {
         path: 'list',
         loadComponent: () =>
-          import('./blog-list/blog-list.component').then(
-            (m) => m.BlogListComponent,
-          ),
+          import('./blog-list/blog-list.component').then((m) => m.BlogListComponent),
       },
       {
         path: ':postId',
@@ -19,17 +17,13 @@ export const blogRoutes: Routes = [
             path: '',
             pathMatch: 'full',
             loadComponent: () =>
-              import('./blog-details/blog-details.component').then(
-                (m) => m.BlogDetailsComponent,
-              ),
+              import('./blog-details/blog-details.component').then((m) => m.BlogDetailsComponent),
           },
           {
             path: 'comment',
             canActivate: [authGuard],
             loadComponent: () =>
-              import('./add-comment/add-comment.component').then(
-                (m) => m.AddCommentComponent,
-              ),
+              import('./add-comment/add-comment.component').then((m) => m.AddCommentComponent),
           },
         ],
       },

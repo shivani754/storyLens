@@ -55,9 +55,7 @@ export class AlbumPhotosComponent implements OnInit {
           const index = Math.floor(Math.random() * this.tempPhotos.length);
           photo.url = this.tempPhotos[index];
         });
-        this.pageParams.totalPage = Math.ceil(
-          this.photos.length / this.pageParams.size,
-        );
+        this.pageParams.totalPage = Math.ceil(this.photos.length / this.pageParams.size);
       })
       .add(() => (this.pageLoader = false));
   }

@@ -15,11 +15,7 @@ export class ModalService {
       new OverlayConfig({
         hasBackdrop: true,
         backdropClass: 'cdk-overlay-dark-backdrop',
-        positionStrategy: this.overlay
-          .position()
-          .global()
-          .centerHorizontally()
-          .centerVertically(),
+        positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
       }),
     );
 

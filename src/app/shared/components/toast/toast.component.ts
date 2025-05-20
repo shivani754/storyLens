@@ -19,17 +19,15 @@ export class ToastComponent implements OnInit, OnDestroy {
   constructor(private toastService: ToastService) {}
 
   ngOnInit(): void {
-    this.subscription = this.toastService.toast$.subscribe(
-      ({ message, type }) => {
-        this.message = message;
-        this.type = type;
-        this.show = true;
+    this.subscription = this.toastService.toast$.subscribe(({ message, type }) => {
+      this.message = message;
+      this.type = type;
+      this.show = true;
 
-        timer(3000).subscribe(() => {
-          this.show = false;
-        });
-      },
-    );
+      timer(3000).subscribe(() => {
+        this.show = false;
+      });
+    });
   }
 
   ngOnDestroy(): void {

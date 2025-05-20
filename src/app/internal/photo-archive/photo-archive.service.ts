@@ -10,14 +10,10 @@ export class PhotoArchiveService {
   constructor(private httpClient: HttpClient) {}
 
   getALbums(params: any) {
-    return this.httpClient.get(
-      this.baseUrl + '/users/' + params.userId + '/albums',
-    );
+    return this.httpClient.get(this.baseUrl + '/users/' + params.userId + '/albums');
   }
 
   getAlbumPhotos(params: any) {
-    return this.httpClient.get(
-      this.baseUrl + 'albums/' + params.albumId + '/photos',
-    );
+    return this.httpClient.get(this.baseUrl + 'albums/' + params.albumId + '/photos');
   }
 }

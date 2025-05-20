@@ -1,8 +1,6 @@
 <!-- login.component.html -->
 <div class="w-full p-8">
-  <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">
-    Login
-  </h2>
+  <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">Login</h2>
 
   <form
     name="loginForm"
@@ -14,17 +12,13 @@
   >
     <!-- Name -->
     <div>
-      <label
-        for="name"
-        class="block mb-1 font-medium text-gray-700 dark:text-gray-300"
+      <label for="name" class="block mb-1 font-medium text-gray-700 dark:text-gray-300"
         >User Name</label
       >
       <input
         type="text"
         [ngClass]="{
-          'input-error':
-            (username.touched || loginForm.submitted) &&
-            username.errors?.['required'],
+          'input-error': (username.touched || loginForm.submitted) && username.errors?.['required'],
         }"
         [(ngModel)]="loginData.username"
         name="username"
@@ -34,10 +28,7 @@
         class="form-input"
         autocomplete="name"
       />
-      @if (
-        (username.touched || loginForm.submitted) &&
-        username.errors?.["required"]
-      ) {
+      @if ((username.touched || loginForm.submitted) && username.errors?.['required']) {
         <div class="text-red-600">
           <span>Enter username</span>
         </div>
@@ -46,17 +37,13 @@
 
     <!-- Password with toggle -->
     <div class="relative">
-      <label
-        for="password"
-        class="block mb-1 font-medium text-gray-700 dark:text-gray-300"
+      <label for="password" class="block mb-1 font-medium text-gray-700 dark:text-gray-300"
         >Password</label
       >
       <input
         [type]="showPassword ? 'text' : 'password'"
         [ngClass]="{
-          'input-error':
-            (password.touched || loginForm.submitted) &&
-            password.errors?.['required'],
+          'input-error': (password.touched || loginForm.submitted) && password.errors?.['required'],
         }"
         [(ngModel)]="loginData.password"
         name="password"
@@ -111,10 +98,7 @@
           />
         </svg>
       </button>
-      @if (
-        (password.touched || loginForm.submitted) &&
-        password.errors?.["required"]
-      ) {
+      @if ((password.touched || loginForm.submitted) && password.errors?.['required']) {
         <div class="text-red-600">
           <span>Enter password</span>
         </div>

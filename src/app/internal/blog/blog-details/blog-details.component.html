@@ -3,16 +3,10 @@
 } @else {
   <div class="max-w-3xl mx-auto p-6 bg-white mt-10">
     <!-- Blog Title -->
-    <h1
-      class="text-3xl font-bold text-gray-800 mb-4"
-      [innerText]="post.title"
-    ></h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-4" [innerText]="post.title"></h1>
 
     <!-- Blog Body -->
-    <p
-      class="text-gray-700 text-lg mb-8 leading-relaxed"
-      [innerText]="post.body"
-    ></p>
+    <p class="text-gray-700 text-lg mb-8 leading-relaxed" [innerText]="post.body"></p>
 
     <!-- Comments -->
     @if (post.id) {

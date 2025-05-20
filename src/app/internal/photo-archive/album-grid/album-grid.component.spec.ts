@@ -8,9 +8,8 @@ describe('AlbumGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AlbumGridComponent]
-    })
-    .compileComponents();
+      imports: [AlbumGridComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AlbumGridComponent);
     component = fixture.componentInstance;
