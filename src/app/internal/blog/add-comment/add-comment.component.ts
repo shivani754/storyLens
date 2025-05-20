@@ -5,6 +5,7 @@ import { Comment } from '../models/comment.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../blog.service';
 import { GlobalService } from '../../../core/services/global.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-add-comment',
@@ -25,6 +26,7 @@ export class AddCommentComponent implements OnInit {
     private route: ActivatedRoute,
     private globalService: GlobalService,
     private blogService: BlogService,
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -38,14 +40,19 @@ export class AddCommentComponent implements OnInit {
    * @description Add comment
    */
   addComment() {
-    this.blogService.addComment(this.commentData).subscribe((response: any) => {
-      this.commentData = response;
-      this.router.navigate(['..'], {
-        relativeTo: this.route,
-        queryParams: {
-          newComment: JSON.stringify(this.commentData),
-        },
-      });
+    this.blogService.addComment(this.commentData).subscribe({
+      next: (response: any) => {
+        this.commentData = response;
+        this.router.navigate(['..'], {
+          relativeTo: this.route,
+          queryParams: {
+            newComment: JSON.stringify(this.commentData),
+          },
+        });
+      },
+      error: () => {
+        this.toastService.showToast('Something went wrong', 'error');
+      },
     });
   }
 }

@@ -4,6 +4,7 @@ import { Album } from '../models/album.model';
 import { PhotoArchiveService } from '../photo-archive.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageLoaderComponent } from '../../../shared/components/page-loader/page-loader.component';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-album-grid',
@@ -20,6 +21,7 @@ export class AlbumGridComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private photoArchiveService: PhotoArchiveService,
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -34,12 +36,13 @@ export class AlbumGridComponent implements OnInit {
     const params = {
       userId: 1,
     };
-    this.photoArchiveService
-      .getALbums(params)
-      .subscribe((response: any) => {
+    this.photoArchiveService.getALbums(params).subscribe({
+      next: (response: any) => {
         this.albums = response;
-      })
-      .add(() => (this.pageLoader = false));
+      },
+      error: () => this.toastService.showToast('Something went wrong', 'error'),
+      complete: () => (this.pageLoader = false),
+    });
   }
 
   /**

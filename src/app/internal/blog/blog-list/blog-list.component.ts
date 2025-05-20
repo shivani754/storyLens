@@ -5,6 +5,7 @@ import { Blog } from '../models/blog.model';
 import { Page } from '../../../shared/models/page.model';
 import { PageLoaderComponent } from '../../../shared/components/page-loader/page-loader.component';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-blog-list',
@@ -22,6 +23,7 @@ export class BlogListComponent implements OnInit {
     private blogService: BlogService,
     private router: Router,
     private route: ActivatedRoute,
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -33,13 +35,14 @@ export class BlogListComponent implements OnInit {
    */
   getBlogPosts() {
     this.pageLoader = true;
-    this.blogService
-      .getBlogPosts()
-      .subscribe((response: any) => {
+    this.blogService.getBlogPosts().subscribe({
+      next: (response: any) => {
         this.posts = response;
         this.pageParams.totalPage = Math.ceil(this.posts.length / this.pageParams.size);
-      })
-      .add(() => (this.pageLoader = false));
+      },
+      error: () => this.toastService.showToast('Something went wrong', 'error'),
+      complete: () => (this.pageLoader = false),
+    });
   }
 
   /**

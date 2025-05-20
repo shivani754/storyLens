@@ -4,6 +4,7 @@ import { BlogService } from '../blog.service';
 import { Blog } from '../models/blog.model';
 import { PageLoaderComponent } from '../../../shared/components/page-loader/page-loader.component';
 import { CommentsComponent } from '../comments/comments.component';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-blog-details',
@@ -25,6 +26,7 @@ export class BlogDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private blogService: BlogService,
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -42,11 +44,12 @@ export class BlogDetailsComponent implements OnInit {
     const params: any = {
       postId: this.postId,
     };
-    this.blogService
-      .getBlogDetails(params)
-      .subscribe((response: any) => {
+    this.blogService.getBlogDetails(params).subscribe({
+      next: (response: any) => {
         this.post = response;
-      })
-      .add(() => (this.pageLoader = false));
+      },
+      error: () => this.toastService.showToast('Something went wrong', 'error'),
+      complete: () => (this.pageLoader = false),
+    });
   }
 }

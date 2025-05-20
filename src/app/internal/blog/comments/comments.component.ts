@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../blog.service';
 import { Comment } from '../models/comment.model';
 import { ProfilePicComponent } from '../../../shared/components/profile-pic/profile-pic.component';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-comments',
@@ -19,6 +20,7 @@ export class CommentsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private blogService: BlogService,
+    private toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -38,8 +40,11 @@ export class CommentsComponent implements OnInit {
     const params: any = {
       postId: this.postId,
     };
-    this.blogService.getComments(params).subscribe((response: any) => {
-      this.comments.push(...response);
+    this.blogService.getComments(params).subscribe({
+      next: (response: any) => {
+        this.comments.push(...response);
+      },
+      error: () => this.toastService.showToast('Something went wrong', 'error'),
     });
   }
 

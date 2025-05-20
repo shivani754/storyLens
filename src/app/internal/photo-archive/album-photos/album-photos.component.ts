@@ -4,6 +4,7 @@ import { Page } from '../../../shared/models/page.model';
 import { PhotoArchiveService } from '../photo-archive.service';
 import { ActivatedRoute } from '@angular/router';
 import { PageLoaderComponent } from '../../../shared/components/page-loader/page-loader.component';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-album-photos',
@@ -32,6 +33,7 @@ export class AlbumPhotosComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private photoArchiveService: PhotoArchiveService,
+    private toastService: ToastService,
   ) {
     this.pageParams.size = 12;
   }
@@ -51,17 +53,18 @@ export class AlbumPhotosComponent implements OnInit {
     const params = {
       albumId: this.albumId,
     };
-    this.photoArchiveService
-      .getAlbumPhotos(params)
-      .subscribe((response: any) => {
+    this.photoArchiveService.getAlbumPhotos(params).subscribe({
+      next: (response: any) => {
         this.photos = response;
         this.photos.forEach((photo) => {
           const index = Math.floor(Math.random() * this.tempPhotos.length);
           photo.url = this.tempPhotos[index];
         });
         this.pageParams.totalPage = Math.ceil(this.photos.length / this.pageParams.size);
-      })
-      .add(() => (this.pageLoader = false));
+      },
+      error: () => this.toastService.showToast('Something went wrong', 'error'),
+      complete: () => (this.pageLoader = false),
+    });
   }
 
   /**
