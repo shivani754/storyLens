@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../../core/services/global.service';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -22,13 +23,14 @@ export class LoginComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private toastService: ToastService,
     private globalService: GlobalService,
   ) {}
 
   onSubmit() {
     let credsInStorage: any = localStorage.getItem('userCredentials');
     if (!credsInStorage) {
-      alert('User doesnt exists!');
+      this.toastService.showToast('User doesnt exists!', 'error');
       return;
     }
     credsInStorage = JSON.parse(credsInStorage);
@@ -36,7 +38,7 @@ export class LoginComponent {
       credsInStorage?.username !== this.loginData.username ||
       credsInStorage?.password !== this.loginData.password
     ) {
-      alert('User or password is not correct!');
+      this.toastService.showToast('User or password is not correct!', 'error');
       return;
     }
     this.globalService.setUserDetails({ username: this.loginData.username });
