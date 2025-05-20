@@ -3,10 +3,11 @@ import { GlobalService } from '../../core/services/global.service';
 import { UserDetailsModel } from '../../shared/models/user-details.model';
 import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { ProfilePicComponent } from '../../shared/components/profile-pic/profile-pic.component';
 
 @Component({
   selector: 'app-navbar',
-  imports: [NgClass],
+  imports: [NgClass, ProfilePicComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })

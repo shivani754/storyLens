@@ -2,10 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../blog.service';
 import { Comment } from '../models/comment.model';
+import { ProfilePicComponent } from '../../../shared/components/profile-pic/profile-pic.component';
 
 @Component({
   selector: 'app-comments',
-  imports: [],
+  imports: [ProfilePicComponent],
   standalone: true,
   templateUrl: './comments.component.html',
   styleUrl: './comments.component.css',
