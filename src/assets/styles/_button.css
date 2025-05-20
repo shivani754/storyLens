@@ -2,17 +2,26 @@
   button:disabled {
     @apply opacity-50 cursor-not-allowed;
   }
-  button:hover:enabled {
+
+  button:enabled:hover {
     @apply cursor-pointer;
   }
 }
 
 @layer components {
   .button-success {
-    @apply px-4 py-2 bg-green-600 hover:bg-green-700 text-white py-2 rounded transition duration-300;
+    @apply px-4 py-2 bg-green-600 text-white rounded transition duration-300;
+  }
+
+  .button-success:enabled:hover {
+    @apply bg-green-700;
   }
 
   .button-indigo {
-    @apply px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-semibold transition;
+    @apply px-4 py-2 bg-indigo-600 text-white py-3 rounded-lg font-semibold transition;
+  }
+
+  .button-indigo:enabled:hover {
+    @apply bg-indigo-700;
   }
 }
