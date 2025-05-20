@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SignupModel } from '../models/signup.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,6 +15,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SignupComponent {
   showPassword = false;
   isPasswordMatch = true;
+  passwordLengthValid = false;
+  passwordSpecialCharValid = false;
   signupData: SignupModel = {
     username: '',
     password: '',
@@ -23,22 +26,30 @@ export class SignupComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private toastService: ToastService,
   ) {}
+
+  onPasswordChange(password: string): void {
+    this.passwordLengthValid = password.length >= 8;
+    this.passwordSpecialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  }
+
+  checkPasswordMatch(): void {
+    this.isPasswordMatch =
+      this.signupData.password === this.signupData.confirmPassword;
+  }
 
   onSubmit() {
     const { username, password } = this.signupData;
-
-    if (this.signupData.password !== this.signupData.confirmPassword) {
-      this.isPasswordMatch = false;
-      return;
-    }
 
     localStorage.setItem(
       'userCredentials',
       JSON.stringify({ username, password }),
     );
-
-    alert('Signup successful! You can now login.');
+    this.toastService.showToast(
+      'Signup successful! You can now login.',
+      'success',
+    );
     this.goToLogin();
   }
 

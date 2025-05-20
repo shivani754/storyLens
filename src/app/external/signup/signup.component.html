@@ -58,10 +58,13 @@
         [type]="showPassword ? 'text' : 'password'"
         [ngClass]="{
           'input-error':
-            (password.touched || signupForm.submitted) &&
-            password.errors?.['required'],
+            (signupData.password &&
+              (!passwordSpecialCharValid || !passwordLengthValid)) ||
+            ((password.touched || signupForm.submitted) &&
+              password.errors?.['required']),
         }"
         [(ngModel)]="signupData.password"
+        (ngModelChange)="onPasswordChange(signupData.password)"
         name="password"
         #password="ngModel"
         required
@@ -69,6 +72,28 @@
         class="form-input input-bg-gray pr-12"
         autocomplete="new-password"
       />
+      @if (
+        signupData.password &&
+        (!passwordLengthValid || !passwordSpecialCharValid)
+      ) {
+        <div class="mt-2 text-sm text-gray-600 dark:text-gray-300 space-y-1">
+          <ng-container
+            [ngTemplateOutlet]="passwordTooltip"
+            [ngTemplateOutletContext]="{
+              text: 'Password should have at least 8 characters',
+              checkCondition: passwordLengthValid,
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="passwordTooltip"
+            [ngTemplateOutletContext]="{
+              text: 'Password should have at least one special character',
+              checkCondition: passwordSpecialCharValid,
+            }"
+          ></ng-container>
+        </div>
+      }
+
       <button
         type="button"
         (click)="showPassword = !showPassword"
@@ -140,6 +165,7 @@
               confirm_password.errors?.['required']),
         }"
         [(ngModel)]="signupData.confirmPassword"
+        (ngModelChange)="checkPasswordMatch()"
         name="confirm_password"
         #confirm_password="ngModel"
         required
@@ -162,15 +188,40 @@
     </div>
 
     <!-- Submit Button -->
-    <button type="submit" class="w-full button-indigo">Sign Up</button>
+    <button
+      type="submit"
+      class="w-full button-indigo"
+      [disabled]="
+        !signupForm.valid ||
+        !isPasswordMatch ||
+        !passwordLengthValid ||
+        !passwordSpecialCharValid
+      "
+    >
+      Sign Up
+    </button>
   </form>
 
   <p class="mt-6 text-center text-gray-600 dark:text-gray-300">
     Already have an account?
     <span
-      class="text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 font-medium"
+      class="text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 font-medium cursor-pointer"
       (click)="goToLogin()"
       >Login here</span
     >
   </p>
+  <!-- Template for password tooltip -->
+  <ng-template
+    #passwordTooltip
+    let-text="text"
+    let-checkCondition="checkCondition"
+  >
+    <div
+      class="flex items-center"
+      [ngClass]="checkCondition ? 'text-green-600' : 'text-red-600'"
+    >
+      <span class="mr-2" [innerText]="checkCondition ? '✅' : '❌'"></span>
+      <span [innerText]="text"></span>
+    </div>
+  </ng-template>
 </div>
