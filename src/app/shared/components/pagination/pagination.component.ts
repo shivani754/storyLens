@@ -16,7 +16,7 @@ export class PaginationComponent {
   get pages(): number[] {
     const visiblePages = 5;
     let start = Math.max(this.currentPage - Math.floor(visiblePages / 2), 1);
-    let end = Math.min(start + visiblePages - 1, this.totalPages);
+    const end = Math.min(start + visiblePages - 1, this.totalPages);
 
     if (end - start < visiblePages - 1) {
       start = Math.max(end - visiblePages + 1, 1);

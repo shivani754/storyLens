@@ -1,5 +1,5 @@
 export class Page {
-  page: number = 1;
-  size: number = 10;
-  totalPage: number = 0;
+  page = 1;
+  size = 10;
+  totalPage = 0;
 }

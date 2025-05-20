@@ -1,9 +1,8 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 import { ModalService } from '../services/modal.service';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
+export const authGuard: CanActivateFn = () => {
   const modalService = inject(ModalService);
   const creds = localStorage.getItem('userCredentials'); // or any key you're storing
   if (creds) {

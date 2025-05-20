@@ -12,7 +12,7 @@ import { CommentsComponent } from '../comments/comments.component';
   styleUrl: './blog-details.component.css',
 })
 export class BlogDetailsComponent implements OnInit {
-  postId: number = 0;
+  postId = 0;
   pageLoader = false;
   post: Blog = {
     id: 0,

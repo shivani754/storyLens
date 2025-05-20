@@ -15,9 +15,9 @@ import { PaginationComponent } from '../../../shared/components/pagination/pagin
 export class AlbumPhotosComponent implements OnInit {
   albumId = 0;
   pageParams: Page = new Page();
-  photos: Array<AlbumPhoto> = [];
+  photos: AlbumPhoto[] = [];
   pageLoader = false;
-  tempPhotos: Array<string> = [
+  tempPhotos: string[] = [
     'https://media.istockphoto.com/id/2181735944/photo/natural-mountains-landscapes.jpg?b=1&s=612x612&w=0&k=20&c=7WJMhHseLhVBEDa8N7ww7J_oqm_w_PlvUlxZPsmF3UI=',
     'https://www.travelandleisure.com/thmb/Z6XGwXju9LHti6QeGeRG2iz7BTk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/japan-BEAUTCONT1021-7d58a9021f7e42fba9ca617ad668fc81.jpg',
     'https://media.istockphoto.com/id/1550071750/photo/green-tea-tree-leaves-camellia-sinensis-in-organic-farm-sunlight-fresh-young-tender-bud.jpg?s=612x612&w=0&k=20&c=RC_xD5DY5qPH_hpqeOY1g1pM6bJgGJSssWYjVIvvoLw=',

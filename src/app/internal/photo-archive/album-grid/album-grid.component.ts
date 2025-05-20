@@ -14,7 +14,7 @@ import { PageLoaderComponent } from '../../../shared/components/page-loader/page
 })
 export class AlbumGridComponent implements OnInit {
   pageLoader = false;
-  albums: Array<Album> = [];
+  albums: Album[] = [];
 
   constructor(
     private route: ActivatedRoute,

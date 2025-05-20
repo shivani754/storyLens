@@ -15,7 +15,7 @@ import { PaginationComponent } from '../../../shared/components/pagination/pagin
 })
 export class BlogListComponent implements OnInit {
   pageParams: Page = new Page();
-  posts: Array<Blog> = [];
+  posts: Blog[] = [];
   pageLoader = false;
 
   constructor(

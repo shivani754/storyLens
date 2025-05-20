@@ -7,8 +7,6 @@ import { UserDetailsModel } from '../../shared/models/user-details.model';
 export class GlobalService {
   private userDetails: any = null;
 
-  constructor() {}
-
   setUserDetails(user: UserDetailsModel): void {
     this.userDetails = user;
   }

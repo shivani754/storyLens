@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ExternalComponent } from './external.component';
 
 export const externalRoutes: Routes = [
   {

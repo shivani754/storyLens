@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-profile-pic',
@@ -7,12 +7,12 @@ import { Component, Input, SimpleChanges } from '@angular/core';
   templateUrl: './profile-pic.component.html',
   styleUrl: './profile-pic.component.css',
 })
-export class ProfilePicComponent {
-  @Input() name: string = '';
+export class ProfilePicComponent implements OnChanges {
+  @Input() name = '';
   @Input() imageUrl: string | null = null;
-  @Input() size: string = 'xs'; // Default size
-  sizeClass: string = 'circle-';
-  bgColor: string = '';
+  @Input() size = 'xs'; // Default size
+  sizeClass = 'circle-';
+  bgColor = '';
   private readonly bgColors = [
     '#FFCDD2',
     '#F8BBD0',

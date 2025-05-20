@@ -12,8 +12,8 @@ import { ProfilePicComponent } from '../../../shared/components/profile-pic/prof
   styleUrl: './comments.component.css',
 })
 export class CommentsComponent implements OnInit {
-  @Input() postId: number = 0;
-  comments: Array<Comment> = [];
+  @Input() postId = 0;
+  comments: Comment[] = [];
 
   constructor(
     private router: Router,
