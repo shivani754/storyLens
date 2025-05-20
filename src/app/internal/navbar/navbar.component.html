@@ -1,4 +1,6 @@
-<div class="flex items-center justify-between bg-gray-800 px-6 py-3 shadow-md">
+<div
+  class="flex items-center justify-between bg-gray-800 px-6 py-3 shadow-md sticky top-0 z-50"
+>
   <!-- Left side: Logo -->
   <div class="flex items-center space-x-4">
     <!-- Logo -->
@@ -53,7 +55,7 @@
       <!-- Dropdown -->
       @if (isDropdownOpen) {
         <div
-          class="absolute right-1 mt-28 w-32 bg-white border rounded-md shadow-lg py-1 z-20"
+          class="absolute right-1 mt-28 w-32 bg-white border rounded-md shadow-lg py-1 z-50"
         >
           <button
             (click)="userDetails.username ? logout() : login()"
