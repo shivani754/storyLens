@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AlbumPhoto } from '../models/album-photos.model';
 import { Page } from '../../../shared/models/page.model';
 import { PhotoArchiveService } from '../photo-archive.service';
 import { ActivatedRoute } from '@angular/router';
 import { PageLoaderComponent } from '../../../shared/components/page-loader/page-loader.component';
-import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-album-photos',
-  imports: [PageLoaderComponent, PaginationComponent],
+  imports: [PageLoaderComponent],
   templateUrl: './album-photos.component.html',
   styleUrl: './album-photos.component.css',
 })
@@ -17,6 +16,7 @@ export class AlbumPhotosComponent implements OnInit {
   pageParams: Page = new Page();
   photos: AlbumPhoto[] = [];
   pageLoader = false;
+  scrollPosition = 0;
   tempPhotos: string[] = [
     'https://media.istockphoto.com/id/2181735944/photo/natural-mountains-landscapes.jpg?b=1&s=612x612&w=0&k=20&c=7WJMhHseLhVBEDa8N7ww7J_oqm_w_PlvUlxZPsmF3UI=',
     'https://www.travelandleisure.com/thmb/Z6XGwXju9LHti6QeGeRG2iz7BTk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/japan-BEAUTCONT1021-7d58a9021f7e42fba9ca617ad668fc81.jpg',
@@ -27,6 +27,7 @@ export class AlbumPhotosComponent implements OnInit {
     'https://www.freestock.com/450/freestock_57816976.jpg',
     'https://www.thehosteller.com/_next/image/?url=https%3A%2F%2Fstatic.thehosteller.com%2Fhostel%2Fimages%2Ffeat.jpg%2Ffeat-1720738119071.jpg&w=2048&q=75',
   ];
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,7 +64,42 @@ export class AlbumPhotosComponent implements OnInit {
       .add(() => (this.pageLoader = false));
   }
 
-  onPageChange(event: any) {
-    this.pageParams.page = event;
+  /**
+   * Get paginated photos for a specific page
+   * @param page Page number to get photos for
+   * @returns Array of photos for the specified page
+   */
+  getPaginatedPhotos(page: number): AlbumPhoto[] {
+    const start = (page - 1) * this.pageParams.size;
+    const end = Math.min(start + this.pageParams.size, this.photos.length);
+    return this.photos.slice(start, end);
+  }
+
+  /**
+   * Scroll to the previous page
+   */
+  scrollLeft() {
+    if (this.pageParams.page > 1) {
+      this.scrollPosition += this.scrollContainer.nativeElement.offsetWidth;
+      this.pageParams.page--;
+    }
+  }
+
+  /**
+   * Scroll to the next page
+   */
+  scrollRight() {
+    if (this.pageParams.page < this.pageParams.totalPage) {
+      this.scrollPosition -= this.scrollContainer.nativeElement.offsetWidth;
+      this.pageParams.page++;
+    }
+  }
+
+  /**
+   * Generate an array of page numbers for pagination
+   * @returns Array of page numbers
+   */
+  getPages(): number[] {
+    return Array.from({ length: this.pageParams.totalPage }, (_, i) => i + 1);
   }
 }
