@@ -31,6 +31,9 @@ export class CommentsComponent implements OnInit {
     this.getComments();
   }
 
+  /**
+   * @description Getting comments for post
+   */
   getComments() {
     const params: any = {
       postId: this.postId,
@@ -40,6 +43,9 @@ export class CommentsComponent implements OnInit {
     });
   }
 
+  /**
+   * @description Navigating to add comment page
+   */
   goToAddComment() {
     this.router.navigate(['comment'], {
       relativeTo: this.route,

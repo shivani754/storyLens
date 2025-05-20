@@ -26,6 +26,11 @@ export class ProfilePicComponent implements OnChanges {
     '#D7CCC8',
   ];
 
+  /**
+   * @description Getting background color randomly from array
+   * @param key
+   * @returns
+   */
   private getRandomColor(key: string): string {
     let hash = 0;
     for (let i = 0; i < key.length; i++) {
@@ -42,6 +47,9 @@ export class ProfilePicComponent implements OnChanges {
     }
   }
 
+  /**
+   * @description Getting initials if profile image is not there
+   */
   get initials(): string {
     if (!this.name) return '';
     const nameParts = this.name.trim().split(' ');

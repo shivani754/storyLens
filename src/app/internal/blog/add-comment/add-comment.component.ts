@@ -34,6 +34,9 @@ export class AddCommentComponent implements OnInit {
     this.commentData.name = this.globalService.getUserDetails().username;
   }
 
+  /**
+   * @description Add comment
+   */
   addComment() {
     this.blogService.addComment(this.commentData).subscribe((response: any) => {
       this.commentData = response;

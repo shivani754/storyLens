@@ -42,6 +42,9 @@ export class AlbumPhotosComponent implements OnInit {
     this.getAlbumPhotos();
   }
 
+  /**
+   * @description Get album photos based on album id
+   */
   getAlbumPhotos() {
     this.pageLoader = true;
     const params = {

@@ -28,6 +28,9 @@ export class BlogListComponent implements OnInit {
     this.getBlogPosts();
   }
 
+  /**
+   * @description Get blog posts
+   */
   getBlogPosts() {
     this.pageLoader = true;
     this.blogService
@@ -39,10 +42,18 @@ export class BlogListComponent implements OnInit {
       .add(() => (this.pageLoader = false));
   }
 
+  /**
+   * @description Changing page number on getting response from pagination component
+   * @param event
+   */
   onPageChange(event: any) {
     this.pageParams.page = event;
   }
 
+  /**
+   * @description Navigating to blog details page
+   * @param id
+   */
   goToBlogDetails(id: number) {
     this.router.navigate(['..', id], {
       relativeTo: this.route,

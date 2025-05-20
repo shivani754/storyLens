@@ -13,6 +13,9 @@ export class PaginationComponent {
   @Input() totalPages = 1;
   @Output() pageChange = new EventEmitter<number>();
 
+  /**
+   * @description Getting pages to show in the pagination bar
+   */
   get pages(): number[] {
     const visiblePages = 5;
     let start = Math.max(this.currentPage - Math.floor(visiblePages / 2), 1);
@@ -29,6 +32,10 @@ export class PaginationComponent {
     return range;
   }
 
+  /**
+   * @description Emitting page change to parent
+   * @param page
+   */
   changePage(page: number) {
     if (page !== this.currentPage && page >= 1 && page <= this.totalPages) {
       this.pageChange.emit(page);

@@ -38,6 +38,9 @@ export class ToastComponent implements OnInit, OnDestroy {
     this.show = false;
   }
 
+  /**
+   * @description Getting toast classes for ifferent toast type
+   */
   get toastClasses(): string {
     switch (this.type) {
       case 'success':

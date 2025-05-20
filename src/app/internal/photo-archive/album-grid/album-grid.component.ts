@@ -26,6 +26,9 @@ export class AlbumGridComponent implements OnInit {
     this.getAlbums();
   }
 
+  /**
+   * @description Get albums for user
+   */
   getAlbums() {
     this.pageLoader = true;
     const params = {
@@ -39,6 +42,10 @@ export class AlbumGridComponent implements OnInit {
       .add(() => (this.pageLoader = false));
   }
 
+  /**
+   * @description Navigating to album photos
+   * @param albumId
+   */
   goToPhotos(albumId: number) {
     this.router.navigate([albumId], {
       relativeTo: this.route,

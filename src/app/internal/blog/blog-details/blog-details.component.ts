@@ -34,6 +34,9 @@ export class BlogDetailsComponent implements OnInit {
     this.getBlogDetails();
   }
 
+  /**
+   * @description Get blog details
+   */
   getBlogDetails() {
     this.pageLoader = true;
     const params: any = {
