@@ -1,1 +1,46 @@
-<p>album-photos works!</p>
+@if (pageLoader) {
+  <app-page-loader />
+} @else {
+  <div class="p-6">
+    <h2 class="text-2xl font-bold mb-6 text-center text-indigo-700">
+      Album Photos
+    </h2>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+      @for (
+        photo of photos.slice(
+          (pageParams.page - 1) * pageParams.size,
+          (pageParams.page - 1) * pageParams.size + pageParams.size
+        );
+        track $index
+      ) {
+        <div
+          class="bg-white border border-indigo-100 rounded-xl shadow-md hover:shadow-xl transition-transform hover:scale-105 overflow-hidden"
+        >
+          <img
+            [src]="photo.url"
+            [alt]="photo.title"
+            class="w-full h-40 object-cover"
+            loading="lazy"
+          />
+          <div class="p-4">
+            <p class="text-indigo-700 font-medium text-sm line-clamp-2">
+              {{ photo.title }}
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Pagination -->
+    @if (photos.length) {
+      <app-pagination
+        [currentPage]="pageParams.page"
+        [totalPages]="pageParams.totalPage"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
+    }
+  </div>
+}
