@@ -20,7 +20,7 @@
       <label
         for="name"
         class="block mb-1 font-medium text-gray-700 dark:text-gray-300"
-        >Full Name</label
+        >User Name</label
       >
       <input
         type="text"
@@ -132,11 +132,12 @@
         >Confirm Password</label
       >
       <input
-        [type]="showPassword ? 'text' : 'password'"
+        [type]="'password'"
         [ngClass]="{
           'input-error':
-            (confirm_password.touched || signupForm.submitted) &&
-            confirm_password.errors?.['required'],
+            !isPasswordMatch ||
+            ((confirm_password.touched || signupForm.submitted) &&
+              confirm_password.errors?.['required']),
         }"
         [(ngModel)]="signupData.confirmPassword"
         name="confirm_password"
@@ -152,6 +153,10 @@
       ) {
         <div class="text-red-600">
           <span>Confirm password</span>
+        </div>
+      } @else if (!isPasswordMatch) {
+        <div class="text-red-600">
+          <span>Password doesn't match</span>
         </div>
       }
     </div>
